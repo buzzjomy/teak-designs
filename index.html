@@ -89,6 +89,14 @@ section.blk{padding-block:48px}
 .facts{display:grid;gap:0;grid-template-columns:1fr}
 @media (min-width:760px){.facts{grid-template-columns:repeat(3,1fr)}}
 .fact{padding:22px 24px 22px 0;border-top:2px solid var(--fg);margin-right:24px}
+.origin{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
+@media (min-width:860px){.origin{grid-template-columns:1.05fr 1fr;gap:48px}}
+.origin figure{margin:0;min-width:0}
+.origin figure img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:4px;background:var(--tile)}
+.origin figcaption{margin-top:10px}
+.origin .facts{grid-template-columns:1fr;min-width:0}
+.origin .fact{margin-right:0}
+.origin .fact:first-child{border-top-width:2px}
 .fact b{display:block;font:700 22px/1.15 var(--f-display);margin:10px 0 6px}
 .fact p{color:var(--muted);max-width:36ch}
 
@@ -380,11 +388,11 @@ function viewHome(){
     CATS.map(function(c){return '<button class="cattile" data-act="list" data-cat="'+c+'"><div class="tile">'+pic(rep[c])+'</div><b>'+c+'</b><span class="mono muted">'+counts[c]+' pieces</span></button>';}).join('')+
     '</div></div></section>'+
     '<section class="blk" style="padding-top:8px"><div class="in"><div class="sechead"><h2>Most loved this season</h2><button class="link" data-act="list">See all '+P.length+' pieces</button></div><div class="grid g4">'+best.map(card).join('')+'</div></div></section>'+
-    '<section class="blk" style="padding-top:8px"><div class="in"><div class="sechead"><h2>What sets our solid teak apart</h2></div><div class="facts">'+
+    '<section class="blk" style="padding-top:8px"><div class="in"><div class="sechead"><h2>What sets our solid teak apart</h2></div><div class="origin"><figure><img src="img/trunk.jpg" alt="Cross-section of a teak trunk showing the growth rings" loading="lazy" decoding="async"><figcaption class="mono muted">Cross-section of a teak trunk. Each ring is one year of growth.</figcaption></figure><div class="facts">'+
     '<div class="fact"><span class="label">Origin</span><b>Kerala and Tamil Nadu forests</b><p>Solid teak heartwood from the forests of Kerala and Tamil Nadu. No sapwood panels and no veneered particle board.</p></div>'+
     '<div class="fact"><span class="label">Seasoning</span><b>10–12% moisture</b><p>Kiln-dried before cutting so doors close and drawers slide through monsoon and summer.</p></div>'+
     '<div class="fact"><span class="label">Joinery</span><b>Mortise and tenon</b><p>Joints are cut to lock into each other and glued, so there is no reliance on screws alone.</p></div>'+
-    '</div></div></section>';
+    '</div></div></div></section>';
 }
 function filtered(){
   var q=S.q.trim().toLowerCase();
