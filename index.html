@@ -199,10 +199,19 @@ aside.drawer.open{transform:none}
 
 /* footer, toast */
 footer{background:var(--brand);color:var(--brand-fg);margin-top:24px}
-footer .in{display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;padding-block:36px}
-footer b{font:800 22px/1 var(--f-display)}
-footer p{opacity:.8;max-width:44ch;margin-top:8px;font-size:14px}
-footer .mono{opacity:.8}
+footer .in{padding-block:44px 28px}
+.fcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}
+@media (min-width:700px){.fcols{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.fcols{grid-template-columns:repeat(5,minmax(0,1fr))}}
+footer h4{margin:0 0 14px;font:700 17px/1.2 var(--f-display);letter-spacing:-.01em}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+footer li{font-size:14px;line-height:1.4;opacity:.85}
+footer li button{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;text-align:left}
+footer li button:hover{text-decoration:underline;text-underline-offset:3px}
+.fbase{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;align-items:end;margin-top:36px;padding-top:24px;border-top:1px solid rgba(127,127,127,.4)}
+.fbase b{font:800 22px/1 var(--f-display)}
+.fbase p{opacity:.85;max-width:44ch;margin:8px 0 0;font-size:14px}
+.fbase .mono{opacity:.85}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--fg);color:var(--bg);padding:11px 18px;border-radius:5px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:60;max-width:calc(100% - 32px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -232,10 +241,7 @@ footer .mono{opacity:.8}
 
 <main id="app"></main>
 
-<footer><div class="in">
-  <div><b>Teak Designs</b><p>Solid teak from the forests of Kerala and Tamil Nadu, made into furniture for living rooms, bedrooms and dining rooms. Cut, seasoned and joined in India.</p></div>
-  <div class="mono">PROTOTYPE · NO REAL ORDERS OR PAYMENTS<br>Products, prices and policies shown are sample content.</div>
-</div></footer>
+<footer><div class="in"><div class="fcols"><div><h4>Company</h4><ul><li><button data-act="soon" data-t="About Us">About Us</button></li><li><button data-act="soon" data-t="Our Artisans">Our Artisans</button></li><li><button data-act="soon" data-t="Our Teak">Our Teak</button></li><li><button data-act="soon" data-t="Contact Us">Contact Us</button></li></ul></div><div><h4>Useful Links</h4><ul><li><button data-act="soon" data-t="Buy in Bulk">Buy in Bulk</button></li><li><button data-act="soon" data-t="Teak Care Guide">Teak Care Guide</button></li><li><button data-act="soon" data-t="Track Your Order">Track Your Order</button></li><li><button data-act="soon" data-t="Visit the Workshop">Visit the Workshop</button></li></ul></div><div><h4>Partner With Us</h4><ul><li><button data-act="soon" data-t="Sell on Teak Designs">Sell on Teak Designs</button></li><li><button data-act="soon" data-t="Become an Artisan Partner">Become an Artisan Partner</button></li><li><button data-act="soon" data-t="Become a Delivery Partner">Become a Delivery Partner</button></li><li><button data-act="soon" data-t="Merchant Login">Merchant Login</button></li></ul></div><div><h4>Need Help?</h4><ul><li><button data-act="soon" data-t="FAQs">FAQs</button></li><li><button data-act="soon" data-t="Policies">Policies</button></li><li><button data-act="soon" data-t="Contact Us">Contact Us</button></li></ul></div><div><h4>Built to Last</h4><ul><li>Solid teak heartwood</li><li>Kiln-dried to 10–12% moisture</li><li>Mortise and tenon joints</li><li>Matte protective finish</li></ul></div></div><div class="fbase"><div><b>Teak Designs</b><p>Solid teak from the forests of Kerala and Tamil Nadu, made into furniture for living rooms, bedrooms and dining rooms. Cut, seasoned and joined in India.</p></div><div class="mono">PROTOTYPE · NO REAL ORDERS OR PAYMENTS<br>Products, prices and policies shown are sample content.</div></div></div></footer>
 
 <div class="scrim" id="scrim" data-act="cart-close"></div>
 <aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
@@ -499,6 +505,7 @@ document.addEventListener('click',function(e){
   var t=e.target.closest('[data-act]');if(!t)return;
   var a=t.dataset.act,d=t.dataset,p;
   if(a==='home')go('home');
+  else if(a==='soon'){toast(d.t+' is not part of this demo yet.');}
   else if(a==='list'){drawer(false);go('list',{cat:d.cat===undefined?'':d.cat});}
   else if(a==='product')go('product',{pid:+d.id});
   else if(a==='quickadd'){addToCart(+d.id,'natural',1);toast('Added to cart');}
